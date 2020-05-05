@@ -47,13 +47,14 @@ def CatMouth(x,y):
     line(295 -x,465 + y, 450,485)
 
 def setup():
-    size(1000,1000)
+    size(500,600)
     color(0)
     textSize(32)
 
-################ GENERATE POPULATION ################
+# GENERATE POPULATION #
     x = 0
     y = 0
+    gennum = 0
     
     population = []
     #shapes = [CatHead(x,y), CatMouth(x,y), CatEyes(x,y)]
@@ -61,7 +62,7 @@ def setup():
     
     
     
-    for i in range(100): # change this value for population size
+    for i in range(10): # change this value for intial population size
         r = int(random(0, 256))
         x = r
         r = int(random(0,500))
@@ -71,10 +72,10 @@ def setup():
     
     print('initial population', population)
     
-    for i in range(1000):
+    for i in range(1000): ###### change number to change generation output
         
         
-    ################ ASSESS FITNESS ################
+    # ASSESS FITNESS #
         scores = []
     
         for dna in population:
@@ -101,19 +102,19 @@ def setup():
         for p, s in zip(population, scores):
             print('fitness score', p, s)
         
-        ################ SELECTION ################
+        # SELECTION #
         
         mating_odds = [] # the 'parents'
         
         for p, s in zip(population, scores):
-            # i've avoided the % method here; i think clive's proposal is fine
+            
             for i in range(int(s)):
                 mating_odds.append(p)
         
         print('mating odds', mating_odds) 
         
                 
-        ################ REPRODUCTION ################
+        # REPRODUCTION #
         children = []
         
         ################ changes from growing up ################
@@ -159,7 +160,8 @@ def setup():
                 children.append(xover2)
             
         
-            population.pop(0)
+                population.pop(0)
+        gennum += 1
             
         
     
@@ -168,16 +170,19 @@ def setup():
         
         print("---------------" + "New Gen" + "---------------")
         
-        x = population[0]
-        y = population[1]
-        
-        background(255)
-        
-        CatHead(x,y)
-        CatEyes(x,y)
-        CatMouth(x,y)
-        
-        text("Generation" + str(i), width/2, height - 20 );
+    x = population[0]
+    y = population[1]
+    
+    background(255)
+    
+    CatHead(x,y)
+    CatEyes(x,y)
+    CatMouth(x,y)
+    fill(0)
+    stroke(0)
+    rect(0, height - 60, width, 100)
+    fill('#ffffff')
+    text("Generation " + str(gennum), width/2 - width/5.1, height - 20 );
     
 
 
